@@ -13,6 +13,7 @@ module Attachinary
         as: :attachinariable,
         class_name: '::Attachinary::File',
         conditions: { scope: options[:scope].to_s },
+        order: 'id ASC',
         dependent: :destroy
 
 
