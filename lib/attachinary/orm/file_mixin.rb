@@ -27,10 +27,14 @@ module Attachinary
 
   private
     def destroy_file
+      Cloudinary::Uploader.delay.destroy(public_id) if public_id
+    rescue
       Cloudinary::Uploader.destroy(public_id) if public_id
     end
 
     def remove_temporary_tag
+      Cloudinary::Uploader.delay.remove_tag(Attachinary::TMPTAG, [public_id]) if public_id
+    rescue
       Cloudinary::Uploader.remove_tag(Attachinary::TMPTAG, [public_id]) if public_id
     end
 
